@@ -8,49 +8,114 @@ import {
   getCategorizedPostCategories,
   getCategorizedPostCategoriesLabels,
   getFeaturedRecipes,
-  getNonFeaturedRecipes
+  getNonFeaturedRecipes,
 } from "@/lib/sanity/client";
 
 export default async function HomeLifeStyle({}) {
-  const featuredPost = await getFeaturedRecipes(18); // Fetching featured posts
-  const posts = await getNonFeaturedRecipes(12); // Fetching non-featured posts
-  const categoriesForList = await getCategorizedPostCategories(7); // Fetching categories
+  const featuredPost = await getFeaturedRecipes(24); // Get enough posts to cover both sections
+  const posts = await getNonFeaturedRecipes(12);
+  const categoriesForList = await getCategorizedPostCategories(7);
 
   return (
     <>
-      
-        {/* Hero Section */}
-        <div className="w-full mt-[18px] md:mt-[24px]">
-          <HeroSection />
-        </div>
-        
-        {/* Category List Section for Mobile*/}
-        <div className="block md:hidden w-full md:pt-8">
-          <CategoryList topAndOtherCategories={categoriesForList} />
-        </div>
+      {/* Hero Section */}
+      <div className="w-full mt-[18px] md:mt-[24px]">
+        <HeroSection />
+      </div>
 
-        {/* Main Content Section */}
-        
-      <div className="bg-[#F1F1F1] flex w-full flex-col gap-[1px] lg:gap-[55px] px-4 md:px-[160px]">
+      {/* Category List Section for Mobile */}
+      <div className="block md:hidden w-full md:pt-8">
+        <CategoryList topAndOtherCategories={categoriesForList} />
+      </div>
 
-        {/* Category List Section for Desktop*/}
+      {/* Main Content Section */}
+      <div className="bg-[#F1F1F1] flex w-full flex-col gap-[1px] lg:gap-[55px] px-4">
+        {/* Category List Section for Desktop */}
         <div className="hidden md:block md:pt-8">
           <CategoryList topAndOtherCategories={categoriesForList} />
         </div>
 
-        {/* Favorite Recipes Section */}
+        {/* Favorite Products Section */}
         <div className="pb-6">
-          {featuredPost.length >= 6 && (
+          {featuredPost.length >= 8 && (
             <>
-              <div className="mt-0 w-full">
-              <h2 className="text-[#1F1F1F] text-2xl font-bold font-nunito md:text-3xl md:font-medium">
-                <strong>Productos recomendados</strong>
-              </h2>
-
+              {/* Desktop version - grid with 4 cols + aligned title */}
+              <div className="hidden md:flex md:flex-col md:items-center md:w-full">
+                <div className="grid grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+                  <div className="col-span-4">
+                    <h2 className="text-[#1F1F1F] text-3xl font-medium font-nunito">
+                      <strong>Productos recomendados</strong>
+                    </h2>
+                  </div>
+                  {featuredPost.slice(0, 8).map((post) => (
+                    <PostList
+                      key={post._id}
+                      post={post}
+                      aspect="landscape"
+                      pathPrefix="blog"
+                      fontWeight="normal"
+                      preloadImage={true}
+                      className="w-full"
+                    />
+                  ))}
+                </div>
               </div>
 
-              <div className="mb-10 mt-[32px] grid w-full gap-[32px] md:grid-cols-3">
-                {featuredPost.slice(0, 6).map((post) => (
+              {/* Mobile version */}
+              <div className="md:hidden w-full mt-6 px-4">
+                <h2 className="text-[#1F1F1F] text-2xl font-bold font-nunito">
+                  <strong>Productos recomendados</strong>
+                </h2>
+                <div className="mt-6 grid grid-cols-1 gap-6">
+                  {featuredPost.slice(0, 8).map((post) => (
+                    <PostList
+                      key={post._id}
+                      post={post}
+                      aspect="landscape"
+                      pathPrefix="blog"
+                      fontWeight="normal"
+                      preloadImage={true}
+                      className="w-full"
+                    />
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Full-width Subscription Section */}
+      <div className="w-full bg-gray-100">
+        <Subscription />
+      </div>
+
+      {/* Other Products Section */}
+      <div className="bg-[#F1F1F1] flex w-full flex-col gap-[1px] lg:gap-[55px] px-4">
+        {/* Other Products Content */}
+        <div className="pb-0 pt-6">
+          {featuredPost.length > 8 && (
+            <div className="mb-2 mt-0 w-full">
+              {/* Desktop - 16 posts */}
+              <div className="hidden md:flex md:items-center md:justify-center">
+                <div className="grid grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+                  {featuredPost.slice(8, 24).map((post) => (
+                    <PostList
+                      key={post._id}
+                      post={post}
+                      aspect="landscape"
+                      pathPrefix="blog"
+                      fontWeight="normal"
+                      preloadImage={true}
+                      className="w-full"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile - 8 posts */}
+              <div className="md:hidden grid grid-cols-2 gap-4 px-4">
+                {featuredPost.slice(8, 16).map((post) => (
                   <PostList
                     key={post._id}
                     post={post}
@@ -62,33 +127,6 @@ export default async function HomeLifeStyle({}) {
                   />
                 ))}
               </div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Full-width Subscription Section */}
-      <div className="w-full bg-gray-100 mb-8">
-        <Subscription />
-      </div>
-
-      {/* Other Posts Section */}
-      <div className="flex w-full flex-col gap-[1px] lg:gap-[55px] px-4 md:px-[120px]">
-        {/* Other 12 Posts Section */}
-        <div className="pb-0 pt-6">
-          {featuredPost.length > 6 && (
-            <div className="mb-2 mt-0 grid w-full gap-[32px] md:grid-cols-3">
-              {featuredPost.slice(6, 18).map((post) => (
-                <PostList
-                  key={post._id}
-                  post={post}
-                  aspect="landscape"
-                  pathPrefix="blog"
-                  fontWeight="normal"
-                  preloadImage={true}
-                  className="w-full"
-                />
-              ))}
             </div>
           )}
         </div>
@@ -98,7 +136,6 @@ export default async function HomeLifeStyle({}) {
           <Link
             href="/archive"
             className="bg-white border border-[#1F1F1F] hover:border-[#1F1F1F] text-[#1F1F1F] hover:bg-[#1F1F1F] hover:text-white transition-colors duration-300 ease-in-out relative inline-flex w-full max-w-[100%] items-center justify-center gap-1 rounded-md px-4 py-3 text-center text-sm font-medium focus:z-20 disabled:pointer-events-none disabled:opacity-40 md:w-auto"
-
             style={{
               borderRadius: "8px",
               fontSize: "16px",
