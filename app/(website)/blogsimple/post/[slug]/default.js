@@ -10,6 +10,9 @@ import { urlForImage } from "@/lib/sanity/image";
 import IngredientList from "@/components/blog/ingredientList";
 import { BannerAd } from "@/components/blog/banner";
 
+// Utility function for robust string validation
+const isValidString = (val) => typeof val === "string" && val.trim() !== "";
+
 export default function Post({ post, loading }) {
   const [hasQueryParamVerified, setHasQueryParamVerified] = useState(false);
 
@@ -26,6 +29,7 @@ export default function Post({ post, loading }) {
   }
 
   const imageProps = post?.mainImage ? urlForImage(post?.mainImage) : null;
+  const hasPostImage = imageProps && isValidString(imageProps.src);
 
   return (
     <>
@@ -43,8 +47,14 @@ export default function Post({ post, loading }) {
               </h1>
 
               {/* Recipe Image */}
-              <div className="mt-6 md:mt-11 relative z-0 aspect-video w-full overflow-hidden lg:rounded-lg">
-                {imageProps && (
+              <div
+                className={
+                  hasPostImage
+                    ? "mt-6 md:mt-11 relative z-0 aspect-video w-full overflow-hidden lg:rounded-lg"
+                    : "mt-0 md:mt-0 relative z-0 w-full overflow-hidden lg:rounded-lg"
+                }
+              >
+                {hasPostImage && (
                   <Image
                     src={imageProps.src}
                     alt={post.mainImage?.alt || "Thumbnail"}
@@ -69,8 +79,7 @@ export default function Post({ post, loading }) {
               </div>
             )}
 
-
-            {/* Mobile   Version */}
+            {/* Mobile Version */}
             <Link
               href="/archive"
               className="absolute left-1/2 inline-flex w-[calc(100%-32px)] -translate-x-1/2 transform items-center justify-center gap-[4px] rounded-[8px] border border-[#2d810d] bg-white px-4 py-[14px] text-sm font-medium text-[#2d810d] hover:bg-[#2d810d] hover:text-white hover:border-[#2d810d] transition-colors duration-300 ease-in-out md:hidden"
@@ -85,8 +94,7 @@ export default function Post({ post, loading }) {
                 See all recipes
               </div>
             </Link>
-
-                  </div>
+          </div>
 
           {/* Second Column */}
           <div className="mt-8 flex w-full flex-col gap-8 lg:mt-0 lg:w-[383px]">
@@ -113,7 +121,6 @@ export default function Post({ post, loading }) {
                 />
                 {/* Subscribe Button */}
                 <button
-                  
                   className="bg-[#F6F6F6] border border-[#2d810d] hover:border-[#2d810d] text-[#2d810d] hover:bg-[#2d810d] hover:text-white transition-colors duration-300 ease-in-out h-[51px] w-[101px] break-words rounded-md text-[16px] font-semibold"
                 >
                   Subscribe
