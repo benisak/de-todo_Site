@@ -2,29 +2,29 @@ import Image from 'next/image';
 
 const Subscription = () => {
   return (
-    <div className="w-full bg-gray-100 flex justify-center p-4">
+    <div className="w-full bg-[#FFFCEC] flex justify-center p-4">
       {/* Outer container to control the width */}
       <div className="w-full max-w-7xl p-8 rounded-lg relative flex flex-col items-start md:flex-row justify-between md:ml-[180px]">
         
         {/* Image Section (hidden on mobile) */}
         <div className="hidden md:flex w-1/3 items-end ml-[45px] relative">
-  <Image
-    src="/img/sub_QK.png"
-    alt="Delicious food"
-    width={281}
-    height={215}
-    className="object-contain absolute bottom-[-194px]" // Adjust the Y-axis with 'bottom'
-  />
-</div>
+          <Image
+            src="/img/sub_DT.png"
+            alt="Delicious food"
+            width={220}
+            height={240}
+            className="object-contain absolute bottom-[-198px]" // Adjust the Y-axis with 'bottom'
+          />
+        </div>
 
 
         {/* Subscription Form */}
         <div className="w-full md:w-2/3 text-left mt-[8px] ml-[-15px]">
-        <h2 className="text-black text-xl md:text-2xl font-nunito font-bold mb-4">
-          Easy recipes, delicious results
+        <h2 className="text-black text-xl md:text-3xl font-nunito font-bold mb-4">
+          Explora, sorpréndete y compra
         </h2>
 
-          <p className="mb-6">Subscribe to receive weekly news and the latest recipes</p>
+          <p className="mb-6">Suscríbete y recibe las mejores recomendaciones de productos para ti.</p>
           <div className="flex flex-row gap-2 md:gap-3 w-full">
             <input
               type="email"
@@ -33,10 +33,10 @@ const Subscription = () => {
             />
             <button
               type="submit"
-              className="bg-[#2d810d] border border-[#2d810d] text-white px-4 py-2 rounded-lg w-[15%] min-w-[108px] md:w-[120px]
-                        hover:bg-white hover:text-[#2d810d] hover:border-[#2d810d] transition-colors duration-300 ease-in-out"
+              className="bg-[#FCD704] border border-[#FCD704] text-black px-0 py-2 rounded-lg w-[15%] min-w-[108px] md:w-[135px]
+                        hover:bg-white hover:text-[#FCD704] hover:border-[#FCD704] transition-colors duration-300 ease-in-out"
             >
-              Subscribe
+              Suscribirme
             </button>
           </div>
         </div>
