@@ -40,7 +40,7 @@ export default async function HomeLifeStyle({}) {
           {featuredPost.length >= 8 && (
             <>
               {/* Desktop version - grid with 4 cols + aligned title */}
-              <div className="hidden md:flex md:flex-col md:items-center md:w-full">
+              <div className="md:mb-8 hidden md:flex md:flex-col md:items-center md:w-full">
                 <div className="grid grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
                   <div className="col-span-4">
                     <h2 className="text-[#1F1F1F] text-3xl font-medium font-nunito">
@@ -97,7 +97,7 @@ export default async function HomeLifeStyle({}) {
           {featuredPost.length > 8 && (
             <div className="mb-2 mt-0 w-full">
               {/* Desktop - 16 posts */}
-              <div className="hidden md:flex md:items-center md:justify-center">
+              <div className="md:mt-8 hidden md:flex md:items-center md:justify-center">
                 <div className="grid grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
                   {featuredPost.slice(8, 24).map((post) => (
                     <PostList
