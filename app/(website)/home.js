@@ -62,7 +62,7 @@ export default async function HomeLifeStyle({}) {
               </div>
 
               {/* Mobile version */}
-              <div className="md:hidden w-full mt-6 px-4">
+              <div className="md:hidden w-full mt-6">
                 <h2 className="text-[#1F1F1F] text-2xl font-bold font-nunito">
                   <strong>Productos recomendados</strong>
                 </h2>
@@ -114,7 +114,7 @@ export default async function HomeLifeStyle({}) {
               </div>
 
               {/* Mobile - 8 posts */}
-              <div className="md:hidden grid grid-cols-2 gap-4 px-4">
+              <div className="md:hidden grid grid-cols-1 gap-4">
                 {featuredPost.slice(8, 16).map((post) => (
                   <PostList
                     key={post._id}

@@ -62,7 +62,9 @@ export default function PostList({
       {/* Text Section */}
       <div
         className={cx(
-          "flex flex-col justify-between flex-1 h-full md:h-[160px]"
+          "flex flex-col justify-between flex-1 h-full md:h-[160px]",
+          "self-start md:self-auto",
+          "-mt-[8px] md:mt-0" // <-- This aligns the text column with the image top on mobile only
         )}
       >
         {/* Top (Category) */}
@@ -75,7 +77,7 @@ export default function PostList({
         </div>
 
         {/* Middle (Title) */}
-        <div className="mt-1 flex-1">
+        <div className="mt-4 md:mt-2 flex-1">
           <h2
             className={cx(
               "text-[14px] md:text-[18px]",
