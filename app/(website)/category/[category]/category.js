@@ -18,7 +18,7 @@ export default function Author(props) {
           {title}
         </h1>
         <p className="mt-1 text-gray-600">
-          {recipes.length} Articles
+          {recipes.length} Productos
         </p>
       </div>
       <div className="mt-14 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">

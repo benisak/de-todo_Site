@@ -29,8 +29,15 @@ module.exports = {
       screens: {
         // default Tailwind screens:
         // sm: '640px', md: '768px', lg: '1024px', xl: '1280px', 2xl: '1536px'
-        // add a 3xl for ~20" displays at 96dpi
-        "3xl": "1920px"
+        
+        // Custom breakpoint for 15-inch laptop screens (e.g., 1440p)
+        'desktop-15': '1440px', 
+        
+        // Your existing custom breakpoint for ~20" displays
+        "3xl": "1920px",
+
+        // Custom breakpoint for large 32-inch monitors (e.g., QHD/2K)
+        'desktop-32': '2560px',
       }
     }
   },

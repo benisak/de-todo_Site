@@ -17,7 +17,7 @@ export default async function NotFoundPage() {
         <h1 className="text-brand-primary text-3xl font-semibold tracking-tight dark:text-white lg:text-5xl lg:leading-tight mb-4">
           Recipes
         </h1>
-        <p>0 Articles</p>
+        <p>0 Productos</p>
       </section>
 
       <div

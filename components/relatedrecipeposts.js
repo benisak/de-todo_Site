@@ -14,117 +14,100 @@ export default function RelatedPost({
   fontSize,
   fontWeight,
 }) {
-  const imageProps = post?.mainImage
-    ? urlForImage(post.mainImage)
-    : null;
-    return (
-      <>
-        <div
-          className={cx(
-            "group cursor-pointer",
-            minimal && "grid gap-4"
-          )}>
-          <div
-            className={cx(
-              "overflow-hidden rounded-md bg-gray-100 transition-all hover:scale-105 dark:bg-gray-800"
-            )}>
-            {/* Parent container with defined size */}
-            <Link
-              href={`/${pathPrefix}/post/${post.slug?.current}`}
-              className="relative block"
-              style={{
-                width: "262px", // Default width for desktop
-                height: "160px", // Default height for desktop
-              }}
-            >
-              {imageProps ? (
-                <Image
-                  src={imageProps.src}
-                  {...(post.mainImage.blurDataURL && {
-                    placeholder: "blur",
-                    blurDataURL: post.mainImage.blurDataURL,
-                  })}
-                  alt={post.mainImage?.alt || "Thumbnail"}
-                  loading="lazy" // Enable lazy loading for off-screen images
-                  fill // Use fill to make the image adapt to the parent container
-                  sizes="(max-width: 768px) 150px, (min-width: 769px) 152px" // Responsive sizes for mobile and desktop
-                  style={{
-                    objectFit: "cover", // Ensures the image covers the container without distortion
-                    borderRadius: "8px", // Applies an 8px border radius on every corner
-                  }}
-                />
-              ) : (
-                <span className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 text-gray-200 rounded-[8px]">
-                  <PhotoIcon />
-              </span>
-            )}
-          </Link>
+  const imageProps = post?.mainImage ? urlForImage(post.mainImage) : null;
+
+  return (
+    <div
+      className={cx(
+        "group cursor-pointer w-full max-w-[600px]",
+        "flex md:flex-col flex-row items-start gap-4"
+      )}
+    >
+      {/* Image Section */}
+      <div
+        className={cx(
+          "inline-flex justify-center items-center gap-2.5 rounded-lg bg-white",
+          "overflow-hidden",
+          "transition-all hover:scale-105 shrink-0",
+          "md:w-[252px] md:h-[276px] w-[103px] h-[88px]"
+        )}
+      >
+        <Link
+          href={`/${pathPrefix}/post/${post.slug?.current}`}
+          className="block w-full h-full p-[12px] box-border"
+        >
+          {imageProps ? (
+            <div className="relative w-full h-full">
+              <Image
+                src={imageProps.src}
+                {...(post.mainImage.blurDataURL && {
+                  placeholder: "blur",
+                  blurDataURL: post.mainImage.blurDataURL,
+                })}
+                alt={post.mainImage?.alt || "Thumbnail"}
+                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 103px, 276px"
+                className="object-cover rounded-lg"
+              />
+            </div>
+          ) : (
+            <span className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 text-gray-200">
+              <PhotoIcon />
+            </span>
+          )}
+        </Link>
+      </div>
+
+      {/* Text Section */}
+      <div
+        className={cx(
+          "flex flex-col justify-between flex-1 h-full md:h-[160px]",
+          "self-start md:self-auto",
+          "-mt-[8px] md:mt-0" // <-- This aligns the text column with the image top on mobile only
+        )}
+      >
+        {/* Top (Category) */}
+        <div className="min-h-[24px]">
+          <CategoryLabel
+            categories={post.categories}
+            nomargin={minimal}
+            className="flex flex-wrap gap-2"
+          />
         </div>
-        <div className={cx(minimal && "flex items-center")}>
-          <div>
-            <CategoryLabel
-              categories={post.categories}
-              nomargin={minimal}
-              className="mb-0 mt-0"
-            />
-            <h2
-              className={cx(
-                fontSize === "large"
-                  ? "text-2xl"
-                  : minimal
-                    ? "text-3xl"
-                    : "text-lg",
-                fontWeight === "normal"
-                  ? "line-clamp-2 font-medium tracking-normal text-black"
-                  : "font-semibold leading-snug tracking-tight",
-                "mt-1"
-              )}>
-              <Link
-                href={`/${pathPrefix}/post/${post.slug?.current}`}>
-                {/* Applied requested typography properties */}
-                <span
-                  style={{
-                    color: "var(--Black-500, #1F1F1F)",
-                    fontSize: "19px",
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                    lineHeight: "normal",
-                  }}>
-                  {post.title}
-                </span>
-              </Link>
-            </h2>
-            <div className="hidden">
-              {post.excerpt && (
-                <p className="mt-2 line-clamp-3 text-sm text-gray-500 dark:text-gray-400">
-                  <Link
-                    href={`/${pathPrefix}/post/${post.slug?.current}`}>
-                    {post.excerpt}
-                  </Link>
-                </p>
-              )}
-            </div>
-            <div className="mt-3 flex items-center space-x-3 text-gray-900 dark:text-gray-400">
-              {/* Updated datetime styling */}
-              <time
-                className="truncate"
-                style={{
-                  color: "var(--Black-500, #1F1F1F)",
-                  fontSize: "13px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-                dateTime={post?.publishedAt || post._createdAt}>
-                {format(
-                  parseISO(post?.publishedAt || post._createdAt),
-                  "MMMM dd, yyyy"
-                )}
-              </time>
-            </div>
-          </div>
+
+        {/* Middle (Title) */}
+        <div className="mt-4 md:mt-2 flex-1">
+          <h2
+            className={cx(
+              "text-[14px] md:text-[18px]",
+              "font-medium md:font-bold",
+              "text-[#1F1F1F]",
+              "leading-tight"
+            )}
+          >
+            <Link href={`/${pathPrefix}/post/${post.slug?.current}`}>
+              {post.title}
+            </Link>
+          </h2>
+        </div>
+
+        {/* Bottom (Price) */}
+        <div className="mt-2">
+          <span
+            className="text-[#1F1F1F] font-bold text-[20px] leading-[30px] break-words"
+            style={{
+              color: "var(--Black-500, #1F1F1F)",
+              fontSize: "20px",
+              fontWeight: 700,
+              lineHeight: "30px",
+              wordWrap: "break-word",
+            }}
+          >
+            $499.900
+          </span>
         </div>
       </div>
-    </>
+    </div>
   );
 }
