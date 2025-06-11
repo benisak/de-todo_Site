@@ -16,7 +16,7 @@ import {
   FaFacebook,
   FaWhatsapp
 } from "react-icons/fa";
-import CategoryList from "@/components/categorylist";
+import CategoryList from "@/components/categorymob_navbar";
 
 interface NavbarProps {
   topAndOtherCategories: AllPostCategories;
@@ -177,7 +177,7 @@ function NavbarContent({
         </div>
       </div>
 
-      {/* Second Row: Logo ,  Categories and Search  */}
+      {/* Second Row: Logo ,  Categories and  Search  */}
       <div
         className="hidden w-full md:block"
         style={{
@@ -441,10 +441,10 @@ function NavbarContent({
         {/* Full-Screen Overlay Navigation Menu */}
         {isMobileMenuOpen && (
           <div
-            className={`fixed inset-0 z-50 flex flex-col bg-white`}>
+            className={`fixed inset-0 z-50 flex flex-col bg-[#F1F1F1]`}>
             {/* Top Row: Logo, WhatsApp Icon, Search Icon, and Close Button */}
             <div
-              className={`flex items-center justify-between px-4 py-4`}>
+              className={`bg-white flex items-center justify-between px-4 py-4`}>
               {/* Logo */}
               <Link
                 href="/"
@@ -570,7 +570,7 @@ function NavbarContent({
                     onClick={toggleOverlayMenu} // Close overlay if the background is clicked
                   ></div>
 
-                  {/* White "Todas las categorías s" Overlay */}
+                  {/* White "Todas las categorías " Overlay */}
                   <div
                     className="fixed inset-x-0 z-50 flex flex-col"
                     style={{
@@ -677,7 +677,7 @@ function NavbarContent({
               )}
 
               {/* CategoryList Component */}
-              <div className="mt-4 px-2">
+              <div className="mt-4">
                 <CategoryList
                   topAndOtherCategories={CategoriesmobileList}
                   onLinkClick={toggleMobileMenu}
