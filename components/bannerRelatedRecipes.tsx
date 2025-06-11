@@ -34,9 +34,9 @@ export default function BannerRelatedRecipes(props) {
         {/* Desktop Version */}
         <Link
           href="/archive"
-          className="hidden md:inline-flex items-center justify-center gap-[4px] rounded-[8px] border border-[#2d810d] bg-[#F6F6F6] px-[16px] py-[12px] text-sm font-medium text-[#2d810d] hover:bg-gray-50 md:mt-1"
+          className="hidden md:inline-flex items-center justify-center gap-[4px] rounded-[8px] border border-black bg-[#F6F6F6] px-[16px] py-[12px] text-sm font-medium text-black hover:bg-gray-50 md:mt-1"
         >
-          See all recipes
+          Ver todos los productos
         </Link>
       </div>
     );
@@ -62,7 +62,7 @@ export default function BannerRelatedRecipes(props) {
 
   return (
     <div className="text-[#1F1F1F] text-xl font-bold">
-      <p className="md:hidden mt-6">Related recipes</p>
+      <p className="md:hidden mt-6">Productos relacionados</p>
 
       {/* Desktop Layout */}
       <div className="hidden md:flex items-center justify-between mt-6">
@@ -79,7 +79,8 @@ export default function BannerRelatedRecipes(props) {
         </button>
 
         <div>
-          <p className="mb-6">Related recipes</p>
+          <p className="mb-6 ml-[56px]">Productos relacionados</p>
+
           <div className="ml-6 grid gap-0 grid-cols-4 flex-wrap">
             {relatedRecipes.slice(currentIndex, currentIndex + itemsPerPage).map((post) => (
               <RelatedPost
@@ -111,7 +112,7 @@ export default function BannerRelatedRecipes(props) {
 
       {/* Mobile Layout */}
       <div className="md:hidden mt-6 mb-6 mobile-layout">
-        <div className="flex overflow-x-auto space-x-4">
+        <div className="flex flex-col gap-[30px]">
           {relatedRecipes.slice(0, 10).map((post) => (
             <RelatedPost
               pathPrefix="blog"
@@ -125,27 +126,17 @@ export default function BannerRelatedRecipes(props) {
             />
           ))}
         </div>
-
-        {/* Horizontal Scroll Bar with additional padding */}
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            background: "#D9D9D9",
-            borderRadius: "20px",
-            marginTop: "20px"
-          }}
-        />
       </div>
 
-      {/* See All Recipes Button */}
+
+      {/* Ver todos los productos Button */}
       <div className="relative flex w-full justify-center mt-1">
         {/* Desktop  Version */}
         <Link
           href="/archive"
-          className="hidden md:inline-flex items-center justify-center gap-[4px] rounded-[8px] border border-[#2d810d] bg-[#F6F6F6] px-[16px] py-[12px] text-sm font-medium text-[#2d810d] hover:bg-gray-50 md:mt-8"
+          className="hidden md:inline-flex items-center justify-center gap-[4px] rounded-[8px] border border-[#1F1F1F] bg-[#F6F6F6] px-[16px] py-[12px] text-sm font-medium text-[#1F1F1F] hover:bg-gray-50 md:mt-8"
         >
-          See all recipes
+         Ver todos los productos
         </Link>
       </div>
     </div>

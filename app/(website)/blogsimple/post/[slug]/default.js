@@ -82,7 +82,7 @@ export default function Post({ post, loading }) {
             {/* Mobile Version */}
             <Link
               href="/archive"
-              className="absolute left-1/2 inline-flex w-[calc(100%-32px)] -translate-x-1/2 transform items-center justify-center gap-[4px] rounded-[8px] border border-[#2d810d] bg-white px-4 py-[14px] text-sm font-medium text-[#2d810d] hover:bg-[#2d810d] hover:text-white hover:border-[#2d810d] transition-colors duration-300 ease-in-out md:hidden"
+              className="absolute left-1/2 inline-flex w-[calc(100%-32px)] -translate-x-1/2 transform items-center justify-center gap-[4px] rounded-[8px] border border-[#1F1F1F] bg-white px-4 py-[14px] text-sm font-medium text-[#1F1F1F] hover:bg-[#1F1F1F] hover:text-white hover:border-[#1F1F1F] transition-colors duration-300 ease-in-out md:hidden"
             >
               <div
                 style={{
@@ -91,7 +91,7 @@ export default function Post({ post, loading }) {
                   wordWrap: "break-word",
                 }}
               >
-                See all recipes
+                Ver tdos los productos
               </div>
             </Link>
           </div>
@@ -132,26 +132,29 @@ export default function Post({ post, loading }) {
       </Container>
 
       {/* Mobile-specific Subscription Component (Full Width) */}
-      <div className="flex w-full flex-col items-start justify-center gap-6 bg-[#F6F6F6] px-4 py-6 lg:hidden">
-        <div className="flex w-full flex-col items-start justify-center gap-4">
-          <h3 className="text-black text-xl md:text-2xl font-nunito font-bold">Easy recipes, delicious results</h3>
-          <p className="break-words text-[16px] font-normal leading-[24px] text-black">
-            Subscribe to receive weekly news and the latest recipes
-          </p>
-        </div>
-        <div className="flex w-full flex-row items-center gap-2">
-          <input
-            type="email"
-            placeholder="Email"
-            className="h-[51px] flex-[219] rounded-xl border border-[#7d7d7d] bg-white px-4 text-base text-[#7d7d7d] focus:outline-none"
-          />
-          <button
-            className="bg-[#F6F6F6] border border-[#2d810d] hover:border-[#2d810d] text-[#2d810d] hover:bg-[#2d810d] hover:text-white transition-colors duration-300 ease-in-out h-[51px] flex-[101px] rounded-md text-[16px] font-semibold hover:opacity-90"
-          >
-            Subscribe
-          </button>
-        </div>
+      <div className="flex w-full flex-col items-start justify-center gap-6 bg-[#FFFCEC] px-4 py-6 lg:hidden">
+      <div className="flex w-full flex-col items-start justify-center gap-4">
+        <h3 className="text-black text-xl md:text-2xl font-nunito font-bold">Explora. Sorpréndete. Compra.</h3>
+        <p className="break-words text-[16px] font-normal leading-[24px] text-black">
+          Suscríbete y recibe las mejores recomendaciones de productos para ti.
+        </p>
       </div>
+      {/* The container for the input and button */}
+      <div className="flex w-full flex-row items-center gap-2">
+        <input
+          type="email"
+          placeholder="Email"
+          // Changed from flex-[219] to a proportional width (e.g., 60%)
+          className="h-[51px] w-3/5 rounded-xl border border-[#7d7d7d] bg-white px-4 text-base text-[#7d7d7d] focus:outline-none"
+        />
+        <button
+          // Changed from flex-[101px] to a wider proportional width (e.g., 40%)
+          className="h-[51px] w-2/5 rounded-md border border-[#FCD704] bg-[#FCD704] text-base font-semibold text-[#1F1F1F] transition-colors duration-300 ease-in-out hover:border-[#FCD704] hover:text-white hover:opacity-90"
+        >
+          Suscribirme
+        </button>
+      </div>
+    </div>
     </>
   );
 }
