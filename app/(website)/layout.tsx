@@ -143,7 +143,7 @@ export default async function Layout({
   const settings = await getSettings();
 
   const categoriesForNavbar = await getCategorizedPostCategories(2);
-  const categoriesForNavbar1 = await getCategorizedPostCategories(3);
+  const categoriesForNavbar1 = await getCategorizedPostCategories(2);
   const categoriesForNavbarMobileList =
     await getCategorizedPostCategories(7);
 
