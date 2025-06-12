@@ -8,12 +8,12 @@ export const runtime = "edge";
 export default async function ArchivePage({ searchParams }) {
   return (
     <div className="relative px-4 md:px-[160px] mb-8 mt-6">
-      <h1 className="text-center text-3xl font-semibold tracking-tight dark:text-white lg:text-4xl lg:leading-snug">
-        Recipes
+      <h1 className="font-nunito text-center text-Black-500 text-2xl md:text-4xl font-black">
+        Productos
       </h1>
       <div className="text-center">
         <p className="mt-2 text-lg">
-          See all our recipes in one place
+          Mira nuestros productos más recientes 
         </p>
       </div>
       {searchParams ? (

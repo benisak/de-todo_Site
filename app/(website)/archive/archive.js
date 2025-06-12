@@ -7,7 +7,7 @@ export default async function Post({ searchParams }) {
   const pageIndex = parseInt(page, 10) || 1; // Default to first page if not provided
 
   const POSTS_PER_PAGE =
-    parseInt(process.env.NEXT_PUBLIC_POSTS_PER_PAGE, 10) || 6;
+    parseInt(process.env.NEXT_PUBLIC_POSTS_PER_PAGE, 10) || 8;
 
   const params = {
     pageIndex: (pageIndex - 1) * POSTS_PER_PAGE, // Calculate correct offset
@@ -28,7 +28,7 @@ export default async function Post({ searchParams }) {
           </span>
         </div>
       )}
-      <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
+      <div className="mt-10 grid gap-4 md:grid-cols-2 lg:gap-10 xl:grid-cols-4">
         {recipes.map(post => (
           <PostList
             pathPrefix={"blog"}
