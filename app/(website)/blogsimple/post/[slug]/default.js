@@ -7,7 +7,7 @@ import Link from "next/link";
 import Container from "@/components/container";
 import { PortableText } from "@/lib/sanity/plugins/portabletext";
 import { urlForImage } from "@/lib/sanity/image";
-import IngredientList from "@/components/blog/ingredientList";
+import SellCard from "@/components/blog/sellCard";
 import { BannerAd } from "@/components/blog/banner";
 
 // Utility function for robust string validation
@@ -99,7 +99,7 @@ export default function Post({ post, loading }) {
           {/* Second Column */}
           <div className="mt-8 flex w-full flex-col gap-8 lg:mt-0 lg:w-[383px]">
             {/* Ingredients List */}
-            <IngredientList ingredients={post.ingredients} />
+            <SellCard ingredients={post.ingredients} />
 
             {/* Subscription Component (Desktop Only) */}
             <div className="hidden flex-col gap-6 rounded-lg bg-gray-100 p-6 lg:flex lg:max-w-[360px] lg:self-center w-full">

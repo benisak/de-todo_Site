@@ -10,7 +10,8 @@ import { urlForImage } from "@/lib/sanity/image";
 import { parseISO, format } from "date-fns";
 import { BannerAd } from "@/components/blog/banner"; // Named import
 import CategoryLabel from "@/components/blog/category";
-import IngredientList from "@/components/blog/ingredientList";
+import SellCard from "@/components/blog/sellCard";
+import MobileButton from "@/components/blog/mobileButton";
 import BannerRelatedRecipes from "@/components/bannerRelatedRecipes";
 
 export default function Post(props) {
@@ -72,6 +73,11 @@ export default function Post(props) {
                 )}
               </div>
 
+              {/* SellCard for mobile*/}
+              <div className="block sm:hidden mt-8">
+                <SellCard ingredients={post.ingredients} />
+              </div>
+
               {/* Recipe body */}
               <article className="prose mb-3 mt-6 w-full break-words dark:prose-invert prose-a:text-blue-600 md:mt-11">
                 {post.body && <PortableText value={post.body} />}
@@ -111,8 +117,14 @@ export default function Post(props) {
 
           {/* Second  Column */}
           <div className="mt-8 flex w-full flex-col gap-8 lg:mt-0 lg:w-[383px]">
-            {/* Ingredients List */}
-            <IngredientList ingredients={post.ingredients} />
+
+            {/* SellCard for desktop*/}
+            <div className="mt-2 hidden sm:block">
+              <SellCard ingredients={post.ingredients} />
+            </div>
+
+            {/* Comprar ahora mobile buttom */}
+            <MobileButton/>
 
             {/* Subscription Component (Desktop Only) */}
             <div className="hidden w-full flex-col gap-6 rounded-lg bg-gray-100 p-6 lg:flex">
