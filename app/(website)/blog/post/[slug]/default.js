@@ -60,18 +60,20 @@ export default function Post(props) {
               </h1>
 
               {/* Recipe Image */}
-              <div className="mt-6 md:mt-11 relative z-0 aspect-video w-full overflow-hidden lg:rounded-lg">
+              <div className="mt-6 md:mt-11 w-full overflow-hidden lg:rounded-lg">
                 {imageProps && (
                   <Image
                     src={imageProps.src}
                     alt={post.mainImage?.alt || "Thumbnail"}
                     loading="eager"
-                    fill
-                    sizes="100vw"
-                    className="object-cover"
+                    width={400}
+                    height={400}
+                    className="w-[328px] h-[328px] sm:w-[400px] sm:h-[400px] object-cover rounded-lg mx-auto"
                   />
                 )}
               </div>
+
+
 
               {/* SellCard for mobile*/}
               <div className="block sm:hidden mt-8">
