@@ -20,7 +20,7 @@ export default function Author(props) {
         <p className="mt-1 text-gray-600">{recipes.length} Productos</p>
       </div>
 
-      <div className="mt-14 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-4">
+      <div className="mt-14 grid gap-4 md:grid-cols-2 lg:gap-10 xl:grid-cols-4">
         {recipes.map((post) => (
           <PostList
             pathPrefix={"blog"}
