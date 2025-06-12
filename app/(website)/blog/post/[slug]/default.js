@@ -130,12 +130,11 @@ export default function Post(props) {
               <input
                 type="email"
                 placeholder="Email"
-                // Changed from w-[226px] to w-3/5 for proportional width
+               
                 className="h-[51px] w-3/5 rounded-xl border border-[#7d7d7d] bg-white px-4 text-base text-[#7d7d7d] focus:outline-none"
               />
               {/* Suscribirme Button */}
               <button
-                // Changed from w-[101px] to w-2/5 for proportional width
                 className="h-[51px] w-2/5 break-words rounded-md border border-[#1F1F1F] bg-[#F6F6F6] text-[16px] font-semibold text-[#1F1F1F] transition-colors duration-300 ease-in-out"
               >
                 Suscribirme
