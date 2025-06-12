@@ -47,21 +47,17 @@ const IngredientList: React.FC<IngredientListProps> = ({ ingredients }) => {
         [Ad] As an Amazon Associate I earn from qualifying purchases*
       </p>
 
-      {/* Desktop Wishlist Button */}
+      {/* Desktop Wishlist Button - CORREGIDO */}
       <a
         href="https://wa.me/1234567890"
         target="_blank"
+        rel="noopener noreferrer" // <-- AQUÍ ESTÁ LA CORRECCIÓN
         className="bg-[#FCD704] border border-[#FCD704] text-[#1F1F1F] mt-4 hidden flex-[1_0_0] items-center justify-center gap-2 rounded-lg p-4 text-base font-semibold hover:bg-white hover:text-[#FCD704] hover:border-[#FCD704]
                         transition-colors duration-300 ease-in-out sm:flex">
         Compar ahora
       </a>
 
-
-
-
-
-
-      {/* Mobile Menu Button - WhatsApp Chat Link */}
+      {/* Mobile Menu Button - WhatsApp Chat Link (Este ya estaba correcto) */}
       <a
         href="https://wa.me/1234567890"
         target="_blank"
