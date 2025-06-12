@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { cx } from "@/utils/all";
 import { urlForImage } from "@/lib/sanity/image";
-import { parseISO, format } from "date-fns";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import CategoryLabel from "@/components/blog/category";
+
 export default function RelatedPost({
   post,
   aspect,
@@ -23,7 +23,7 @@ export default function RelatedPost({
         "flex md:flex-col flex-row items-start gap-4"
       )}
     >
-      {/* Image Section */}
+      {/* Image Section - No changes needed here */}
       <div
         className={cx(
           "inline-flex justify-center items-center gap-2.5 rounded-lg bg-white",
@@ -59,43 +59,48 @@ export default function RelatedPost({
         </Link>
       </div>
 
-      {/* Text Section */}
+      {/* Text Section - REVISED FOR FLEXIBILITY AND TEXT TRUNCATION */}
       <div
         className={cx(
-          "flex flex-col justify-between flex-1 h-full md:h-[160px]",
+          // Use flexbox to distribute content vertically and fill the height
+          "flex flex-col flex-1 h-full",
+          // Removed md:h-[160px] to allow flexible height
           "self-start md:self-auto",
-          "-mt-[8px] md:mt-0" // <-- This aligns the text column with the image top on mobile only
+          "-mt-[8px] md:mt-0"
         )}
       >
-        {/* Top (Category) */}
-        <div className="min-h-[24px]">
-          <CategoryLabel
-            categories={post.categories}
-            nomargin={minimal}
-            className="flex flex-wrap gap-2"
-          />
+        {/* Top Section (Category & Title) - This part will grow */}
+        <div className="flex-grow">
+          <div className="min-h-[24px]">
+            <CategoryLabel
+              categories={post.categories}
+              nomargin={minimal}
+              className="flex flex-wrap gap-2"
+            />
+          </div>
+
+          <div className="mt-4 md:mt-2">
+            <h2
+              className={cx(
+                "text-[14px] md:text-[18px]",
+                "font-medium md:font-bold",
+                "text-[#1F1F1F]",
+                "leading-tight",
+                "line-clamp-2" // <-- THE FIX: Truncate title after 2 lines
+              )}
+            >
+              <Link href={`/${pathPrefix}/post/${post.slug?.current}`}>
+                {post.title}
+              </Link>
+            </h2>
+          </div>
         </div>
 
-        {/* Middle (Title) */}
-        <div className="mt-4 md:mt-2 flex-1">
-          <h2
-            className={cx(
-              "text-[14px] md:text-[18px]",
-              "font-medium md:font-bold",
-              "text-[#1F1F1F]",
-              "leading-tight"
-            )}
-          >
-            <Link href={`/${pathPrefix}/post/${post.slug?.current}`}>
-              {post.title}
-            </Link>
-          </h2>
-        </div>
-
-        {/* Bottom (Price) */}
+        {/* Bottom (Price) - This part stays at the bottom */}
         <div className="mt-2">
           <span
             className="text-[#1F1F1F] font-bold text-[20px] leading-[30px] break-words"
+            // Inline styles are redundant if using Tailwind, but kept as is
             style={{
               color: "var(--Black-500, #1F1F1F)",
               fontSize: "20px",
