@@ -53,7 +53,7 @@ export default async function Footer() {
             />
             {/* Copyright for Desktop */}
             <div className="hidden sm:block text-[#FFF] text-sm font-normal leading-normal">
-            de todo 2025. All rights reserved
+            de todo 2025. Todos los derechos reservados
             </div>
           </div>
           {/* Links Categories Column */}
@@ -100,7 +100,7 @@ export default async function Footer() {
           </div>
           {/* Email */}
           <div className="text-[#FCD704] text-base font-semibold underline lg:self-end">
-            <a href="mailto:hola@myoldwine.com">hello@de-todo.com</a>
+            <a href="mailto:hola@myoldwine.com">hola@de-todo.com</a>
           </div>
 
           </div>
@@ -109,7 +109,7 @@ export default async function Footer() {
         {/* Copyright for Mobile Inside Container */}
         <div className="block sm:hidden mt-6 mb-[16px]">
           <div className="text-[#FFF] text-sm font-normal leading-normal">
-          de todo 2025. All rights reserved
+          de todo 2025. Todos los derechos reservados
           </div>
         </div>
 
