@@ -35,28 +35,28 @@ async function sharedMetaData(params: any) {
     title: {
       default:
         settings?.title ||
-        "Quickest Kitchen | Quick & Delicious Recipes for Busy Lives",
-      template: "%s | Quickest Kitchen | Quick & Delicious Recipes for Busy Lives"
+        "De-Todo | Tu Tienda Online para Comprar de Todo",
+      template: "%s | De-Todo | Tu Tienda Online para Comprar de Todo"
     },
     description:
       settings?.description ||
-      "Discover quick, simple, and flavorful recipes perfect for your busy lifestyle. Quickest Kitchen makes cooking at home effortless and delicious, so you can enjoy great meals without the hassle.",
+      "En De-Todo, tu e-commerce de confianza, tenemos todo lo que necesitas. Explora miles de productos, encuentra las mejores ofertas y compra online de forma fácil, rápida y segura.",
     keywords: ["recipes", "cooking", "easy recipes", "dinner ideas", "healthy recipes", "meal planning", "desserts", "baking", "quick meals", "homemade", "cooking tips", "food blog", "kitchen hacks", "family meals", "comfort food"],
-    authors: [{ name: "Surjith" }],
+    authors: [{ name: "DreamCode" }],
     canonical: settings?.url,
     openGraph: {
       images: [
         {
           url:
             urlForImage(settings?.openGraphImage)?.src ||  
-            "/img/opengraphQK.png",
+            "/img/opengraphDT.png",
           width: 800,
           height: 600
         }
       ]
     },
     twitter: {
-      title: settings?.title || "Quickest Kitchen | Quick & Delicious Recipes for Busy Lives",
+      title: settings?.title || "De-Todo | Tu Tienda Online para Comprar de Todo",
       card: "summary_large_image"
     },
     robots: {
@@ -67,14 +67,14 @@ async function sharedMetaData(params: any) {
 }
 
 
-const siteUrl = "https://www.quickestkitchen.com/"; // Ensure this is correct
+const siteUrl = "https://de-todo-lovat.vercel.app/"; 
 
 export async function generateMetadata({ params }: { params: any }) {
   const settings = await getSettings();
 
-  const siteTitle = "Quickest Kitchen | Quick & Delicious Recipes for Busy Lives";
+  const siteTitle = "De-Todo | Tu Tienda Online para Comprar de Todo";
   const siteDescription =
-    "Discover quick, simple, and flavorful recipes perfect for your busy lifestyle. Quickest Kitchen makes cooking at home effortless and delicious, so you can enjoy great meals without the hassle.";
+    "En De-Todo, tu e-commerce de confianza, tenemos todo lo que necesitas. Explora miles de productos, encuentra las mejores ofertas y compra online de forma fácil, rápida y segura.";
     
   const keywords = [
     "recipes",
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: { params: any }) {
     "comfort food"
   ];
 
-  const ogImage = `${siteUrl}/img/opengraphQK.png`;
+  const ogImage = `${siteUrl}/img/opengraphDT.png`;
   const twitterHandle = "@quickestkitchen";
 
   return {
@@ -113,10 +113,10 @@ export async function generateMetadata({ params }: { params: any }) {
           url: ogImage, // Corrected to avoid duplication
           width: 1200, // Recommended Open Graph size
           height: 630,
-          alt: "Quickestkitchen Open Graph Image"
+          alt: "De Todo Open Graph Image"
         }
       ],
-      siteName: "Quickestkitchen",
+      siteName: "De-Todo",
       type: "website"
     },
     twitter: {
@@ -127,8 +127,8 @@ export async function generateMetadata({ params }: { params: any }) {
       images: [ogImage]
     },
     icons: {
-      icon: "/img/Favicon%20QK.png",
-      apple: "/img/Favicon%20QK.png"
+      icon: "/img/FaviconDT.svg",
+      apple: "/img/FaviconDT.svg",
     }
   };
 }
@@ -167,8 +167,8 @@ export default async function Layout({
         />
         {/* End Google Tag Manager */}
         {/* Custom favicon links */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/img/Favicon%20QK.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/img/Favicon%20QK.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/FaviconDT.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/FaviconDT.svg" />
       </head>
 
       <body className="text-gray-800 antialiased dark:bg-black dark:text-gray-400">
