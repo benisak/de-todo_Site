@@ -18,8 +18,9 @@ export default function CategoryList({
   const { topCategories, otherCategories } = topAndOtherCategories;
   const categories: PostCategory[] = [...topCategories, ...otherCategories];
 
-  // Only show up to 8 categories for the 3x3 grid (last cell is "Ver todos")
-  const mobileCategories = categories.slice(0, 8);
+  // Slice the array to get a maximum of 8 categories for display.
+  // This will be used for both mobile and desktop grids.
+  const displayCategories = categories.slice(0, 8);
 
   return (
     <div className="w-full bg-[#FCD704] px-4 pb-6 md:bg-[#F1F1F1] md:px-0 md:pb-12">
@@ -27,7 +28,7 @@ export default function CategoryList({
 
       {/* Mobile grid: unchanged */}
       <div className="grid grid-cols-3 gap-2 md:hidden">
-        {mobileCategories.map((cat) => (
+        {displayCategories.map((cat) => (
           <CategoryCard key={cat._id} category={cat} onClick={onLinkClick} />
         ))}
         <Link
@@ -41,10 +42,11 @@ export default function CategoryList({
         </Link>
       </div>
 
-      {/* Desktop grid: updated */}
+      {/* Desktop grid: updated to use the sliced array */}
       <div className="hidden md:flex md:flex-col md:items-center md:w-full md:bg-[#F1F1F1]">
         <div className="grid grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
-          {categories.map((cat) => (
+          {/* Mapped over the sliced `displayCategories` to enforce the 8-item limit */}
+          {displayCategories.map((cat) => (
             <CategoryCard key={cat._id} category={cat} onClick={onLinkClick} desktop />
           ))}
         </div>
