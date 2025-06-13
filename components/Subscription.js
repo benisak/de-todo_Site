@@ -33,7 +33,7 @@ const Subscription = () => {
             />
             <button
               type="submit"
-              className="bg-[#FCD704] border border-[#FCD704] text-black px-0 py-2 rounded-lg w-[15%] min-w-[108px] md:w-[135px]
+              className="bg-[#FCD704] border border-[#FCD704] text-black font-semibold px-0 py-2 rounded-lg w-[15%] min-w-[108px] md:w-[135px]
                         hover:bg-white hover:text-[#FCD704] hover:border-[#FCD704] transition-colors duration-300 ease-in-out"
             >
               Suscribirme

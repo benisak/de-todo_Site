@@ -25,7 +25,7 @@ export default function Input() {
       <SearchInput
         q={query}
         handleChange={handleChange}
-        placeholder="Search your Recipe"
+        placeholder="Buscar"
       />
     </div>
   );
