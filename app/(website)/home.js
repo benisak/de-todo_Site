@@ -19,7 +19,7 @@ export default async function HomeLifeStyle({}) {
   return (
     <>
       {/* Hero Section */}
-      <div className="w-full mt-[18px] md:mt-[24px]">
+      <div className="w-full">
         <HeroSection />
       </div>
 
