@@ -178,16 +178,16 @@ function NavbarContent({
       </div>
 
       {/* Second Row: Logo ,  Categories and  Search  */}
-      <div
-        className="hidden w-full md:block"
-        style={{
-          backgroundColor: "#FFFFFF",
-          paddingLeft: "165px",
-          paddingRight: "170px"
-        }}>
-        <div className="flex items-center justify-between mt-5">
-          {/* Logo as Button */}
-           <Link
+<div
+  className="hidden w-full md:block h-[92px]"
+  style={{
+    backgroundColor: "#FFFFFF",
+    paddingLeft: "165px",
+    paddingRight: "170px"
+  }}>
+  <div className="flex items-center justify-between h-full"> {/* You could add h-full here to ensure the child fills the parent's height */}
+    {/* Logo as Button */}
+     <Link
       href="/"
       className="block w-[143px] h-[44px]"
     >
@@ -200,129 +200,130 @@ function NavbarContent({
       />
     </Link>
 
-         {/* Categories */}
-          <div className="flex items-center space-x-6">
-            {/* Adjusted space-x-5 to space-x-6 for a 24px gap */}
-            {leftmenu.map((item, index) => (
-              <Fragment key={`${item.label}${index}`}>
-                <Link
-                  href={item.href}
-                  className="font-nunito font-normal text-base text-black"
-                  style={{
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 400
-                  }}>
-                  {item.label}
-                </Link>
-              </Fragment>
-            ))}
+   {/* Categories */}
+    <div className="flex items-center space-x-6">
+      {/* Adjusted space-x-5 to space-x-6 for a 24px gap */}
+      {leftmenu.map((item, index) => (
+        <Fragment key={`${item.label}${index}`}>
+          <Link
+            href={item.href}
+            className="font-nunito font-normal text-base text-black"
+            style={{
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 400
+            }}>
+            {item.label}
+          </Link>
+        </Fragment>
+      ))}
 
-            {/* Dropdown for Todas las categorías */}
-            <div
-              className="relative inline-block text-center"
-              ref={dropdownRef}>
-              <button
-                className="inline-flex w-full justify-center bg-white px-0 py-2 font-nunito font-normal text-base text-black focus:outline-none"
+      {/* Dropdown for Todas las categorías */}
+      <div
+        className="relative inline-block text-center"
+        ref={dropdownRef}>
+        <button
+          className="inline-flex w-full justify-center bg-white px-0 py-2 font-nunito font-normal text-base text-black focus:outline-none"
+          style={{
+            fontSize: "14px",
+            fontStyle: "normal",
+            fontWeight: 400
+          }}
+          onClick={toggleDropdown}>
+          Todas las categorías
+          <svg
+            className="-mr-1 ml-2 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true">
+            <path
+              fillRule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+
+        {isDropdownOpen && (
+        <div
+          className="absolute left-1 transform -translate-x-1 mt-2 w-[260px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          style={{ zIndex: "1000" }} // Ensures dropdown is always superposed to other content
+        >
+          <div
+            className="text-left"
+            role="menu"
+            aria-orientation="vertical">
+            {rightmenu.slice(0, MAX_CATEGORIES).map((item, index) => (
+              <Link
+                key={`${item.label}${index}`}
+                href={item.href}
+                className="block px-2 py-2 text-sm text-black hover:bg-gray-100"
+                role="menuitem"
+                onClick={() => setIsDropdownOpen(false)}
                 style={{
-                  fontSize: "14px",
+                  fontSize: "13px",
                   fontStyle: "normal",
-                  fontWeight: 400
+                  fontWeight: "500"
                 }}
-                onClick={toggleDropdown}>
-                Todas las categorías
-                <svg
-                  className="-mr-1 ml-2 h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true">
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-
-              {isDropdownOpen && (
-              <div
-                className="absolute left-1 transform -translate-x-1 mt-2 w-[260px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                style={{ zIndex: "1000" }} // Ensures dropdown is always superposed to other content
               >
-                <div
-                  className="text-left"
-                  role="menu"
-                  aria-orientation="vertical">
-                  {rightmenu.slice(0, MAX_CATEGORIES).map((item, index) => (
-                    <Link
-                      key={`${item.label}${index}`}
-                      href={item.href}
-                      className="block px-2 py-2 text-sm text-black hover:bg-gray-100"
-                      role="menuitem"
-                      onClick={() => setIsDropdownOpen(false)}
-                      style={{
-                        fontSize: "13px",
-                        fontStyle: "normal",
-                        fontWeight: "500"
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            </div>
-            {/* Search Bar */}
-            {/* Conditionally render the search bar */}
-            {!hideSearchBar && (
-              <div className="relative">
-                <form
-                  onSubmit={e => {
-                    e.preventDefault(); // Evita el comportamiento predeterminado
-                    // Redirige a la URL correcta con el query string
-                    window.location.href = `/search?q=${searchQuery}`;
-                  }}>
-                  <input
-                    type="text"
-                    className="w-56 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#070202]"
-                    placeholder="Buscar"
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                    style={{
-                      borderRadius: "8px",
-                      border: "1px solid var(--Black-300, #7D7D7D)",
-                      background: "var(--Whyte, #FFF)"
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    className="absolute inset-y-0 right-3 flex items-center"
-                    aria-label="Busca nuestro productos" // Added aria-label for accessibility
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none">
-                      <path
-                        d="M21 21L16.7 16.7M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-                        stroke="#000000"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </form>
-              </div>
-            )}
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
+      )}
+
       </div>
+      {/* Search Bar */}
+      {/* Conditionally render the search bar */}
+      {!hideSearchBar && (
+        <div className="relative">
+          <form
+            onSubmit={e => {
+              e.preventDefault(); // Evita el comportamiento predeterminado
+              // Redirige a la URL correcta con el query string
+              window.location.href = `/search?q=${searchQuery}`;
+            }}>
+            <input
+              type="text"
+              className="w-56 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#070202]"
+              placeholder="Buscar"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              style={{
+                borderRadius: "8px",
+                border: "1px solid var(--Black-300, #7D7D7D)",
+                background: "var(--Whyte, #FFF)"
+              }}
+            />
+            <button
+              type="submit"
+              className="absolute inset-y-0 right-3 flex items-center"
+              aria-label="Busca nuestro productos" // Added aria-label for accessibility
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none">
+                <path
+                  d="M21 21L16.7 16.7M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
 
       {/* Mobile-Specific Section */}
       <div className="relative block w-full bg-white px-4 py-4 md:hidden">
