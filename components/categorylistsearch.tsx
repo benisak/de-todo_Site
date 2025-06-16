@@ -86,8 +86,8 @@ function CategoryCard({
         <div
           className={
             desktop
-              ? "flex-shrink-0 h-[80px] w-[80px] rounded-lg bg-gray-100 flex items-center justify-center"
-              : "h-[72px] w-[72px] rounded-lg bg-gray-100 flex items-center justify-center"
+              ? "flex-shrink-0 h-[80px] w-[80px] rounded-lg bg-white flex items-center justify-center"
+              : "h-[72px] w-[72px] rounded-lg bg-white flex items-center justify-center"
           }
         >
           {category.image?.asset?.url ? (
@@ -97,7 +97,7 @@ function CategoryCard({
               className="h-full w-full object-cover rounded-lg"
             />
           ) : (
-            <div className="h-full w-full flex items-center justify-center bg-gray-200 rounded-lg">
+            <div className="h-full w-full flex items-center justify-center bg-white rounded-lg">
               <span className="text-sm text-gray-500">No Image</span>
             </div>
           )}
