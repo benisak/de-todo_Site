@@ -185,7 +185,7 @@ function NavbarContent({
           paddingLeft: "165px",
           paddingRight: "170px"
         }}>
-        <div className="flex items-center justify-between py-5">
+        <div className="flex items-center justify-between mt-5">
           {/* Logo as Button */}
            <Link
       href="/"
