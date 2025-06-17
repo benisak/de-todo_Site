@@ -29,7 +29,7 @@ export default function PostList({
           "inline-flex justify-center items-center gap-2.5 rounded-lg bg-white",
           "overflow-hidden",
           "transition-all hover:scale-105 shrink-0",
-          "md:w-[276px] md:h-[276px] w-[103px] h-[88px]"
+          "md:w-[276px] md:h-[276px] w-[72px] h-[72px]"
         )}
       >
         <Link
@@ -47,7 +47,7 @@ export default function PostList({
                 alt={post.mainImage?.alt || "Thumbnail"}
                 loading="lazy"
                 fill
-                sizes="(max-width: 768px) 103px, 276px"
+                sizes="(max-width: 768px) 72px, 276px"
                 className="object-cover rounded-lg"
               />
             </div>
