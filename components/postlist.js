@@ -28,7 +28,7 @@ export default function PostList({
         className={cx(
           "inline-flex justify-center items-center gap-2.5 rounded-lg bg-white",
           "overflow-hidden",
-          "transition-all hover:scale-105 shrink-0",
+          "transition-all hover:scale-105",
           "md:w-[276px] md:h-[276px] w-[72px] h-[72px]"
         )}
       >
