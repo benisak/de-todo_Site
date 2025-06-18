@@ -207,11 +207,10 @@ function NavbarContent({
         <Fragment key={`${item.label}${index}`}>
           <Link
             href={item.href}
-            className="font-nunito font-normal text-base text-black"
+            className="font-nunito font-semibold text-base text-black"
+
             style={{
-              fontSize: "14px",
               fontStyle: "normal",
-              fontWeight: 400
             }}>
             {item.label}
           </Link>
@@ -223,11 +222,9 @@ function NavbarContent({
         className="relative inline-block text-center"
         ref={dropdownRef}>
         <button
-          className="inline-flex w-full justify-center bg-white px-0 py-2 font-nunito font-normal text-base text-black focus:outline-none"
+          className="inline-flex w-full justify-center bg-white px-0 py-2 font-nunito font-semibold  text-base text-black focus:outline-none"
           style={{
-            fontSize: "14px",
             fontStyle: "normal",
-            fontWeight: 400
           }}
           onClick={toggleDropdown}>
           Todas las categorías

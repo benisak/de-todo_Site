@@ -7,7 +7,7 @@ export const runtime = "edge";
 
 export default async function ArchivePage({ searchParams }) {
   return (
-    <div className="relative px-4 md:px-[160px] mb-8 mt-6">
+    <div className="bg-[#F1F1F1] relative px-4 md:px-[160px] pb-8 pt-6">
       <h1 className="font-nunito text-center text-Black-500 text-2xl md:text-4xl font-black">
         Productos
       </h1>
