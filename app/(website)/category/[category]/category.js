@@ -12,7 +12,7 @@ export default function Author(props) {
   }
 
   return (
-     <div className="bg-[#FAFAFA] pt-14 pb-10 px-4 md:px-[160px] lg:gap-[55px]">
+     <div className="bg-[#F1F1F1] pt-14 pb-10 px-4 md:px-[160px] lg:gap-[55px]">
       <div className="flex flex-col items-center justify-center">
         <h1 className="font-nunito text-center text-Black-500 text-2xl md:text-4xl font-black">
           {title}
