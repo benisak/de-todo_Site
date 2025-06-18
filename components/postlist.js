@@ -29,12 +29,14 @@ export default function PostList({
           "inline-flex justify-center items-center gap-2.5 rounded-lg bg-white",
           "overflow-hidden",
           "transition-all hover:scale-105",
-          "md:w-[276px] md:h-[276px] w-[72px] h-[72px]"
+          // CHANGED: The mobile size is now 88x88px. The `md:` prefix ensures the desktop size remains unchanged.
+          "md:w-[276px] md:h-[276px] w-[88px] h-[88px]"
         )}
       >
         <Link
           href={`/${pathPrefix}/post/${post.slug?.current}`}
-          className="block w-full h-full p-[12px] box-border"
+          // CHANGED: Padding is now 8px to make the inner image container 72x72px (88px - 8px*2).
+          className="block w-full h-full p-[8px] box-border"
         >
           {imageProps ? (
             <div className="relative w-full h-full">
@@ -47,6 +49,7 @@ export default function PostList({
                 alt={post.mainImage?.alt || "Thumbnail"}
                 loading="lazy"
                 fill
+                // NOTE: The 'sizes' prop is still correct. It tells the browser the image will render at 72px on small screens.
                 sizes="(max-width: 768px) 72px, 276px"
                 className="object-cover rounded-lg"
               />
