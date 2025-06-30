@@ -80,20 +80,20 @@ export default function PostList({
         </div>
 
         {/* Middle (Title) */}
-        <div className="mt-4 md:mt-2 flex-1">
-          <h2
-            className={cx(
-              "text-[14px] md:text-[18px]",
-              "font-medium md:font-bold",
-              "text-[#1F1F1F]",
-              "leading-tight"
-            )}
-          >
-            <Link href={`/${pathPrefix}/post/${post.slug?.current}`}>
-              {post.title}
-            </Link>
-          </h2>
-        </div>
+       <div className="mt-4 md:mt-2 flex-1">
+        <h2
+          className={cx(
+            "text-[14px] md:text-[18px]",
+            "font-medium",
+            "text-[#1F1F1F]",
+            "leading-tight"
+          )}
+        >
+          <Link href={`/${pathPrefix}/post/${post.slug?.current}`}>
+            {post.title}
+          </Link>
+        </h2>
+      </div>
 
         {/* Bottom (Price) */}
         <div className="mt-2">
