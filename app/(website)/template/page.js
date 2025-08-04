@@ -1,153 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/container";
-import { useSearchParams } from "next/navigation";
 import CategoryLabel from "@/components/blog/category";
 import SellCard from "./sellCard_template";
 import MobileButton from "@/components/blog/mobileButton";
+import TemplateClient from "./TemplateClient";
 
-export default function TemplatePage() {
-  const searchParams = useSearchParams();
+function PageContent() {
   const [templateData, setTemplateData] = useState(null);
   const [hasQueryParamVerified, setHasQueryParamVerified] = useState(false);
 
-  useEffect(() => {
-    // Extract URL parameters
-    const price = searchParams.get("price");
-    const image = searchParams.get("image");
-    const title = searchParams.get("title");
-    const categoriesParam = searchParams.get("categories");
-    
-    // Parse categories (split by comma)
-    const categories = categoriesParam ? categoriesParam.split(",").map(cat => ({
-      title: cat.trim(),
-      slug: { current: cat.trim().toLowerCase() }
-    })) : [];
-
-    // Check for verification query parameter
-    const verification = searchParams.get("verification");
-    if (verification === "dreamcode") {
-      setHasQueryParamVerified(true);
-    }
-
-    // Hardcoded data for iPhone 16 example
-    const hardcodedData = {
-      title: title || "iPhone 16",
-      price: price || "999", // This will be passed to SellCard
-      image: image || "https://via.placeholder.com/400x400",
-      categories: categories.length > 0 ? categories : [
-        { title: "Electronics", slug: { current: "electronics" } },
-        { title: "Smartphones", slug: { current: "smartphones" } }
-      ],
-      // Rest of your hardcoded data remains the same...
-      body: [
-        {
-          _type: "block",
-          children: [
-            {
-              _type: "span",
-              text: "El iPhone 16 redefine la experiencia móvil con su potente chip A18 Bionic y cámaras avanzadas. Diseñado para usuarios que buscan rendimiento excepcional y calidad premium."
-            }
-          ]
-        },
-        {
-          _type: "block",
-          children: [
-            {
-              _type: "span",
-              text: "Características principales:"
-            }
-          ]
-        },
-        {
-          _type: "block",
-          listItem: "bullet",
-          children: [
-            {
-              _type: "span",
-              text: "Pantalla Super Retina XDR de 6.1 pulgadas"
-            }
-          ]
-        },
-        {
-          _type: "block",
-          listItem: "bullet",
-          children: [
-            {
-              _type: "span",
-              text: "Chip A18 Bionic con GPU de 5 núcleos"
-            }
-          ]
-        },
-        {
-          _type: "block",
-          listItem: "bullet",
-          children: [
-            {
-              _type: "span",
-              text: "Sistema de cámaras Pro con zoom óptico 3x"
-            }
-          ]
-        },
-        {
-          _type: "block",
-          listItem: "bullet",
-          children: [
-            {
-              _type: "span",
-              text: "Batería de larga duración con carga rápida"
-            }
-          ]
-        },
-        {
-          _type: "block",
-          listItem: "bullet",
-          children: [
-            {
-              _type: "span",
-              text: "Resistente al agua IP68"
-            }
-          ]
-        }
-      ],
-      ingredients: [
-        {
-          _key: "1",
-          ingredient: "128GB de almacenamiento interno",
-          quantity: "1"
-        },
-        {
-          _key: "2",
-          ingredient: "Cable USB-C a Lightning",
-          quantity: "1"
-        },
-        {
-          _key: "3",
-          ingredient: "Documentación y pegatinas Apple",
-          quantity: "1"
-        }
-      ],
-      mainImage: {
-        alt: title || "iPhone 16"
-      }
-    };
-
-    setTemplateData(hardcodedData);
-  }, [searchParams]);
-
-  // Show loading if no data yet
-  if (!templateData) {
-    return (
-      <Container className="relative">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-lg">Cargando...</p>
-        </div>
-      </Container>
-    );
-  }
+  const handleReady = (data, verified) => {
+    setTemplateData(data);
+    setHasQueryParamVerified(verified);
+  };
 
   // Simple PortableText renderer for hardcoded content
   const renderPortableText = (content) => {
@@ -167,8 +36,21 @@ export default function TemplatePage() {
     });
   };
 
+  if (!templateData) {
+    return (
+      <Container className="relative">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <p className="text-lg">Cargando...</p>
+        </div>
+        <TemplateClient onReady={handleReady} />
+      </Container>
+    );
+  }
+
   return (
     <>
+      <TemplateClient onReady={handleReady} />
+      
       <Container className="relative">
         <div className="flex flex-col items-start gap-6 md:px-0 lg:w-[1199px] lg:flex-row lg:gap-[112px]">
           <div className="mx-auto w-full md:mx-0 md:w-auto lg:w-[616px]">
@@ -307,5 +189,21 @@ export default function TemplatePage() {
         </div>
 
     </>
+  );
+}
+
+export default function TemplatePage() {
+  return (
+    <Suspense
+      fallback={
+        <Container className="relative">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <p className="text-lg">Cargando...</p>
+          </div>
+        </Container>
+      }
+    >
+      <PageContent />
+    </Suspense>
   );
 }
