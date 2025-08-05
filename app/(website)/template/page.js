@@ -1,24 +1,90 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/container";
 import CategoryLabel from "@/components/blog/category";
+import PriceCard from "./pricecard";
 import SellCard from "./sellCard_template";
 import MobileButton from "@/components/blog/mobileButton";
 import TemplateClient from "./TemplateClient";
+import ProductInfo from "@/components/blog/product_info";
+import FavoriteButton from "@/components/blog/FavoriteButton";
+import ShareButton from "@/components/blog/ShareButton";
+
 
 function PageContent() {
   const [templateData, setTemplateData] = useState(null);
   const [hasQueryParamVerified, setHasQueryParamVerified] = useState(false);
+  const containerRef = useRef(null);
+
+  const whatsappNumber = "573004631759";
+  const whatsappMessage = `Hola! Estoy interesado en ${templateData?.title || 'este producto'}`;
 
   const handleReady = (data, verified) => {
     setTemplateData(data);
     setHasQueryParamVerified(verified);
   };
 
-  // Simple PortableText renderer for hardcoded content
+  // 🔒 Disable scroll on mount
+  useEffect(() => {
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = `-${scrollX}px`;
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+    document.body.style.overflow = 'hidden';
+
+    const preventTouchMove = (e) => e.preventDefault();
+    document.addEventListener('touchmove', preventTouchMove, { passive: false });
+    document.addEventListener('wheel', preventTouchMove, { passive: false });
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.overflow = '';
+
+      document.removeEventListener('touchmove', preventTouchMove);
+      document.removeEventListener('wheel', preventTouchMove);
+      window.scrollTo(scrollX, scrollY);
+    };
+  }, []);
+
+  // 💬 Redirect all clicks to WhatsApp except interactive elements
+  useEffect(() => {
+    const handleClickOrKey = (e) => {
+      const excludedSelectors = [
+        'a', 'button', 'input', 'textarea', 'select',
+        '[tabindex]', '[role="button"]', '.prose a'
+      ];
+
+      const isExcluded = excludedSelectors.some(selector => e.target.closest(selector));
+      if (!isExcluded) {
+        const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+        window.open(url, '_blank');
+      }
+    };
+
+    document.addEventListener('click', handleClickOrKey);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        handleClickOrKey(e);
+      }
+    });
+
+    return () => {
+      document.removeEventListener('click', handleClickOrKey);
+      document.removeEventListener('keydown', handleClickOrKey);
+    };
+  }, [whatsappNumber, whatsappMessage]);
+
   const renderPortableText = (content) => {
     return content.map((block, index) => {
       if (block.listItem === "bullet") {
@@ -50,39 +116,65 @@ function PageContent() {
   return (
     <>
       <TemplateClient onReady={handleReady} />
-      
-      <Container className="relative">
+
+      <Container ref={containerRef} className="relative">
         <div className="flex flex-col items-start gap-6 md:px-0 lg:w-[1199px] lg:flex-row lg:gap-[112px]">
           <div className="mx-auto w-full md:mx-0 md:w-auto lg:w-[616px]">
-            <div className="flex w-full flex-col items-center px-0 md:items-start md:px-0">
+            <div className="flex w-full flex-col items-start px-0 md:px-0">
 
-              {/* Category */}
+
+              {/* Product Info Component - Added above Category */}
+              <div className="flex w-full mb-1">
+                <ProductInfo 
+                  status={templateData.productStatus || "Nuevo"}
+                  salesCount={templateData.salesCount || 50}
+                  rating={templateData.rating || 5.0}
+                  reviewCount={templateData.reviewCount || 40}
+                />
+
+              </div>
+
               <div className="flex w-full">
                 <CategoryLabel categories={templateData.categories} />
               </div>
 
-              {/* Title */}
               <h1 className="mt-2 font-nunito text-brand-primary w-full text-3xl font-bold tracking-tight dark:text-white lg:text-4xl lg:leading-snug">
                 {templateData.title}
               </h1>
 
-              {/* Product Image */}
-              <div className="mt-6 md:mt-11 w-full overflow-hidden lg:rounded-lg">
-                <Image
-                  src={templateData.image}
-                  alt={templateData.mainImage?.alt || "Product Image"}
-                  loading="eager"
-                  width={400}
-                  height={400}
-                  unoptimized={true}
-                  className="w-[328px] h-[328px] sm:w-[400px] sm:h-[400px] object-cover rounded-lg mx-auto"
-                />
+              <PriceCard 
+                price={templateData.price} 
+                discount={templateData.discount} 
+              />
+
+              <div className="mt-6 md:mt-11 w-full flex flex-col items-end gap-2">
+                {/* Buttons aligned right, above image */}
+                <div className="flex items-center gap-2">
+                  <FavoriteButton />
+                  <ShareButton />
+                </div>
+
+                {/* Image below */}
+                <div className="w-full overflow-hidden lg:rounded-lg">
+                  <Image
+                    src={templateData.image}
+                    alt={templateData.mainImage?.alt || "Product Image"}
+                    loading="eager"
+                    width={400}
+                    height={400}
+                    unoptimized={true}
+                    className="w-[328px] h-[328px] sm:w-[400px] sm:h-[400px] object-cover rounded-lg mx-auto"
+                  />
+                </div>
               </div>
 
-              {/* SellCard for mobile - NOW PASSING PRICE */}
               <div className="block sm:hidden mt-8">
                 <SellCard price={templateData.price} />
               </div>
+              <div className="block sm:hidden mt-8">
+              
+            </div>
+
 
               <article className="prose mb-3 mt-6 w-full break-words dark:prose-invert prose-a:text-blue-600 md:mt-11">
                 <div>
@@ -103,27 +195,18 @@ function PageContent() {
               href="/archive"
               className="absolute left-1/2 inline-flex w-[calc(100%-32px)] -translate-x-1/2 transform items-center justify-center gap-[4px] rounded-[8px] border border-[#1F1F1F] bg-white px-4 py-[14px] text-sm font-medium text-[#1F1F1F] hover:bg-[#1F1F1F] hover:text-white hover:border-[#1F1F1F] transition-colors duration-300 ease-in-out md:hidden"
             >
-              <div
-                style={{
-                  fontSize: 16,
-                  fontWeight: "600",
-                  wordWrap: "break-word",
-                }}
-              >
+              <div style={{ fontSize: 16, fontWeight: "600", wordWrap: "break-word" }}>
                 Ver todos los productos
               </div>
             </Link>
           </div>
 
-          {/* Second Column */}
           <div className="mt-8 flex w-full flex-col gap-8 lg:mt-0 lg:w-[383px]">
-
-            {/* SellCard for desktop - NOW PASSING PRICE */}
             <div className="mt-2 hidden sm:block">
               <SellCard price={templateData.price} />
             </div>
 
-            <MobileButton/>
+            <MobileButton />
 
             <div className="hidden w-full flex-col gap-6 rounded-lg bg-gray-100 p-6 lg:flex">
               <div className="flex flex-col gap-4">
@@ -171,38 +254,34 @@ function PageContent() {
         </div>
       </div>
 
-      {/* Archive Link - NEW SECTION AT THE END */}
       <div className="archive-link hidden md:flex w-full justify-center px-0 sm:px-[30px] sm:py-[50px] md:py-0 pb-[56px] md:pb-[32px] pt-[24px]">
-          <Link
-            href="/archive"
-            className="bg-white border border-[#1F1F1F] hover:border-[#1F1F1F] text-[#1F1F1F] hover:bg-[#1F1F1F] hover:text-white transition-colors duration-300 ease-in-out relative inline-flex w-full max-w-[100%] items-center justify-center gap-1 rounded-md px-4 py-3 text-center text-sm font-medium focus:z-20 disabled:pointer-events-none disabled:opacity-40 md:w-auto"
-            style={{
-              borderRadius: "8px",
-              fontSize: "16px",
-              fontStyle: "normal",
-              fontWeight: 600,
-              lineHeight: "normal",
-            }}
-          >
-            <span>Ver todos los productos</span>
-          </Link>
-        </div>
-
+        <Link
+          href="/archive"
+          className="bg-white border border-[#1F1F1F] hover:border-[#1F1F1F] text-[#1F1F1F] hover:bg-[#1F1F1F] hover:text-white transition-colors duration-300 ease-in-out relative inline-flex w-full max-w-[100%] items-center justify-center gap-1 rounded-md px-4 py-3 text-center text-sm font-medium focus:z-20 disabled:pointer-events-none disabled:opacity-40 md:w-auto"
+          style={{
+            borderRadius: "8px",
+            fontSize: "16px",
+            fontStyle: "normal",
+            fontWeight: 600,
+            lineHeight: "normal",
+          }}
+        >
+          <span>Ver todos los productos</span>
+        </Link>
+      </div>
     </>
   );
 }
 
 export default function TemplatePage() {
   return (
-    <Suspense
-      fallback={
-        <Container className="relative">
-          <div className="flex items-center justify-center min-h-[400px]">
-            <p className="text-lg">Cargando...</p>
-          </div>
-        </Container>
-      }
-    >
+    <Suspense fallback={
+      <Container className="relative">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <p className="text-lg">Cargando...</p>
+        </div>
+      </Container>
+    }>
       <PageContent />
     </Suspense>
   );
