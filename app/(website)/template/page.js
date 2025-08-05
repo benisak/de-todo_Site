@@ -13,7 +13,6 @@ import ProductInfo from "@/components/blog/product_info";
 import FavoriteButton from "@/components/blog/FavoriteButton";
 import ShareButton from "@/components/blog/ShareButton";
 
-
 function PageContent() {
   const [templateData, setTemplateData] = useState(null);
   const [hasQueryParamVerified, setHasQueryParamVerified] = useState(false);
@@ -57,7 +56,7 @@ function PageContent() {
     };
   }, []);
 
-  // 💬 Redirect all clicks to WhatsApp except interactive elements
+  // Redirect all clicks to WhatsApp except interactive elements
   useEffect(() => {
     const handleClickOrKey = (e) => {
       const excludedSelectors = [
@@ -104,24 +103,42 @@ function PageContent() {
 
   if (!templateData) {
     return (
-      <Container className="relative">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-lg">Cargando...</p>
-        </div>
-        <TemplateClient onReady={handleReady} />
-      </Container>
+      <>
+        {/* Full page overlay */}
+        <div 
+          className="fixed inset-0 pointer-events-none"
+          style={{ 
+            backgroundColor: 'rgba(80, 80, 80, 0.45)',
+            zIndex: 5
+          }}
+        />
+        <Container className="relative">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <p className="text-lg">Cargando...</p>
+          </div>
+          <TemplateClient onReady={handleReady} />
+        </Container>
+      </>
     );
   }
 
   return (
     <>
+      {/* FULL PAGE GREY OVERLAY - Covers entire viewport */}
+      <div 
+        className="fixed inset-0 pointer-events-none"
+        style={{ 
+          backgroundColor: 'rgba(80, 80, 80, 0.45)', // More visible grey with 25% opacity
+          zIndex: 5 // Low z-index so content appears above
+        }}
+      />
+
       <TemplateClient onReady={handleReady} />
 
       <Container ref={containerRef} className="relative">
         <div className="flex flex-col items-start gap-6 md:px-0 lg:w-[1199px] lg:flex-row lg:gap-[112px]">
           <div className="mx-auto w-full md:mx-0 md:w-auto lg:w-[616px]">
             <div className="flex w-full flex-col items-start px-0 md:px-0">
-
 
               {/* Product Info Component - Added above Category */}
               <div className="flex w-full mb-1">
@@ -131,7 +148,6 @@ function PageContent() {
                   rating={templateData.rating || 5.0}
                   reviewCount={templateData.reviewCount || 40}
                 />
-
               </div>
 
               <div className="flex w-full">
@@ -173,8 +189,7 @@ function PageContent() {
               </div>
               <div className="block sm:hidden mt-8">
               
-            </div>
-
+              </div>
 
               <article className="prose mb-3 mt-6 w-full break-words dark:prose-invert prose-a:text-blue-600 md:mt-11">
                 <div>
@@ -205,8 +220,6 @@ function PageContent() {
             <div className="mt-2 hidden sm:block">
               <SellCard price={templateData.price} />
             </div>
-
-            <MobileButton />
 
             <div className="hidden w-full flex-col gap-6 rounded-lg bg-gray-100 p-6 lg:flex">
               <div className="flex flex-col gap-4">
@@ -269,6 +282,11 @@ function PageContent() {
           <span>Ver todos los productos</span>
         </Link>
       </div>
+
+      {/* MobileButton with higher z-index to appear above overlay */}
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <MobileButton />
+      </div>
     </>
   );
 }
@@ -276,11 +294,21 @@ function PageContent() {
 export default function TemplatePage() {
   return (
     <Suspense fallback={
-      <Container className="relative">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-lg">Cargando...</p>
-        </div>
-      </Container>
+      <>
+        {/* Full page overlay for loading state too */}
+        <div 
+          className="fixed inset-0 pointer-events-none"
+          style={{ 
+            backgroundColor: 'rgba(80, 80, 80, 0.45)',
+            zIndex: 5
+          }}
+        />
+        <Container className="relative">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <p className="text-lg">Cargando...</p>
+          </div>
+        </Container>
+      </>
     }>
       <PageContent />
     </Suspense>
