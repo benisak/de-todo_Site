@@ -9,6 +9,7 @@ export default function TemplateClient({ onReady }) {
 
   useEffect(() => {
     const price = searchParams.get("price");
+    const discount = searchParams.get("discount");
     const image = searchParams.get("image");
     const title = searchParams.get("title");
     const categoriesParam = searchParams.get("categories");
@@ -24,6 +25,7 @@ export default function TemplateClient({ onReady }) {
     const hardcodedData = {
       title: title || "iPhone 16",
       price: price || "999",
+      discount: discount || "10",
       image: image || "https://via.placeholder.com/400x400",
       categories: categories.length > 0 ? categories : [
         { title: "Electronics", slug: { current: "electronics" } },

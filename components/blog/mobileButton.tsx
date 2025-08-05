@@ -8,21 +8,21 @@ interface MobileButtonProps {
 
 const MobileButton: React.FC<MobileButtonProps> = ({ isOverlayVisible }) => {
   return (
-    <a
-      href="https://wa.me/33334567890"
-      target="_blank"
-      rel="noopener noreferrer"
-      id="mobile-menu-button"
-      className={`fixed bottom-4 left-4 right-4 z-40 sm:hidden ${
-        isOverlayVisible ? "pointer-events-none" : ""
+    <div
+      className={`fixed inset-x-0 bottom-0 z-50 sm:hidden ${
+        isOverlayVisible ? "pointer-events-none opacity-50" : ""
       }`}
     >
-      <div className="flex h-full w-full items-center justify-start gap-6">
-        <div
-          className="flex flex-1 items-center justify-center gap-2.5 rounded-lg bg-[#FCD704] p-4"
-          style={{ height: 51 }}
+      {/* Bottom Sheet Card */}
+      <div className="w-full bg-white px-4 pt-5 pb-6 shadow-[0_-2px_10px_rgba(0,0,0,0.08)] flex flex-col gap-2">
+        {/* Comprar ahora (primary) */}
+        <a
+          href="https://wa.me/33334567890"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-[51px] w-full items-center justify-center gap-2.5 rounded-lg bg-[#FCD704] transition-colors"
         >
-          {/* SVG ICON */}
+          {/* WhatsApp Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -42,13 +42,20 @@ const MobileButton: React.FC<MobileButtonProps> = ({ isOverlayVisible }) => {
               fill="black"
             />
           </svg>
-
-          <span className="text-base font-semibold text-[#1F1F1F]">
+          <span className="text-base font-semibold text-black">
             Comprar ahora
           </span>
+        </a>
+
+        {/* Agregar al carrito (secondary) */}
+        <div
+          className="h-[51px] w-full rounded-lg bg-[#D3D3D3] text-black text-base font-semibold transition-colors hover:opacity-90 flex items-center justify-center"
+        >
+          Agregar al carrito
         </div>
+
       </div>
-    </a>
+    </div>
   );
 };
 
