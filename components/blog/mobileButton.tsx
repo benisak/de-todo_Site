@@ -14,7 +14,7 @@ const MobileButton: React.FC<MobileButtonProps> = ({ isOverlayVisible }) => {
       }`}
     >
       {/* Bottom Sheet Card */}
-      <div className="w-full bg-white px-4 pt-5 pb-6 shadow-[0_-2px_10px_rgba(0,0,0,0.08)] flex flex-col gap-2">
+      <div className="w-full bg-[#F0F0F0] px-4 pt-5 pb-6 shadow-[0_-2px_10px_rgba(0,0,0,0.08)] flex flex-col gap-2">
         {/* Comprar ahora (primary) */}
         <a
           href="https://wa.me/33334567890"
